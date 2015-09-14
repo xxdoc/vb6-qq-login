@@ -1,0 +1,144 @@
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 13:03:53 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=3133330bbdbbc66aa178688988ab0ed0bb43863e4b228db66117098b63ecefe4e634a5c540f27001adfd44f11e7a5c46b0efd2596a4a1c39; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=AunzJsO7bZeFzP7JQDNh9sK0kFJcVJuPiSKCp2EHcsA_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 13:05:13 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=7c5c98cd321a4764199178d322b766bc7597dba5989e273183976712f934bc8e9b7ae8bf763cd9e82739175ca1af74d0f331b852d0a29347; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=F53jYXWGFYUsoTAnkDO8WzHmCPp4KaLfq54zbYxDEEk_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 16:23:47 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=3fef7b3897974545d3ac521655e9c0eea66f22e3e87a4baf1f4cc0936a4f1fec42212698308b7078568254a2706fe70e2e5ce68788cab866; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=uuxLhnyzuVULZAILlO4uldGYzOaEpap-4Dgpep7HzSY_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 16:28:05 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=53c0de5ce596c771880157806c06d9e27dd7b582233eec41aa6dcc86917d812f31cf80d8706d21bec8d2f1ab0d2a6c8c26fcf87386d1da10; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=IKhZd3YjcStZxUuQ7jl0JS6N1jCvR4HKenbiEhyM8tU_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:26:12 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=a1d876d5be2b9fe7fbe12bb007910dfaa6a78c009bcf7b0c2f22f166ba6ff5a727d9457ba0674a0fbf546c6e5f3798f9e67463d734c9025f; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=d9aLhrZS8ZEMGaEd42YNL4wNBjpDanwTU9yu2YNNNL8_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:28:07 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=10b061dc9a7bb4599261801a9a98315a6879a825dbb779c90d840da72867112d330187db5b3add674ffce941df61b9750ea575187291b1f5; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=LLsxEbti1MqnAWbVUF1xu7q2GWr04Osunj2g*eof8L4_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:29:38 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=23c0eaa960cb1273836610bcfa0be9ac11cbbf17fb7fb4a4d9e20a42d4fb48551ad5e1bcb4c6ccceadda17e44c3e44bdc26fff1c5a1fb5a5; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=JjljBIWWVVKXMGAQeuiJTXkv4D3bckz30z*H9Fo78wM_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:30:15 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=5ed61ce0e41586770eebbd880fe0fd9ed9fac9671d10976dd8de96b90387521ba604445804806bb2aba26dcef44c10be08aab46ffd34d947; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=6TtvXsHMJ3SUICEYn3ndBKK6w53TqXrpER0syanTk-U_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:34:27 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=8c160ec6bef65eca458d5238f062027e9a836ab8f192d3dbcaba0271ec9256e8755ac7bab1d623081ba5df3305bb6203a7c893d7e22489fe; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=GWW5LVFqrJgInDNgIUw*0HPT-ZmULr-WuQndVYj8fww_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:36:24 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=194d6f7ba3839133a2fc183d047e4fd64aef1bf38fd8ab7444b4f98395d4ae37508f3febe17bbe079499a63c132126e183ff1de3a1c03a54; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=mXd6HE8meV5*nT-c9SDeEFsFQbro5oUerwButoWMh84_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:42:13 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=6910284f0f9e54a78bd6ea0f42382eaac5b98b9a22ba949df58e154b010c2af8bdd3208ae4311946f4d3189559b15c82e776a8d7daa5e80d; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=5qOa-aiNAm0r8NM5-9X4zm1ok6*TFxAaXNM61iLMo40_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
+Connection: keep-alive
+Date: Mon, 14 Sep 2015 17:50:55 GMT
+Pragma: No-cache
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript; charset=utf-8
+P3P: CP="CAO PSA OUR"
+Server: nginx/1.9.1
+Set-Cookie: confirmuin=0; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptvfsession=8eac8f2b539d77cfed4d35643e81b4e377d0022669e19d60a9f354a58e9bff07474fbd9ca01ec1e8a75a0021cccf34d25e0a5bda216881f9; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptdrvs=q0hRCHBhnJD-rPmcX3Nu*DdslFTo5G2o9PxqFVQES4c_; PATH=/; DOMAIN=ptlogin2.qq.com;
+Set-Cookie: ptisp=ctc; PATH=/; DOMAIN=qq.com;
+
