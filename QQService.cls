@@ -142,7 +142,7 @@ End Sub
 Private Sub Class_Terminate()
   '
   Set WinHttp = Nothing
-  Dim j() As String
+  Dim J() As String
 End Sub
 
 
@@ -185,18 +185,18 @@ End Function
 Private Function CollectCookie(ByVal HeaderString As String) As String
   Dim lines() As String
   Dim line As String
-  Dim i As Integer, cookieContentLoc As Integer
+  Dim I As Integer, cookieContentLoc As Integer
   Dim cookies As String
   lines = Split(HeaderString, vbCrLf)
-  i = 0
-  For i = 0 To UBound(lines)
-    line = lines(i)
+  I = 0
+  For I = 0 To UBound(lines)
+    line = lines(I)
     cookieContentLoc = InStr(1, line, "Set-Cookie:")
     If InStr(1, line, "Set-Cookie:") > 0 Then
       cookieContentLoc = cookieContentLoc + Len("Set-Cookie:")
       cookies = cookies & Mid(line, cookieContentLoc)
     End If
-  Next i
+  Next I
   CollectCookie = cookies
 End Function
 '//////////////////////////////////////////////////////////////////////////////
@@ -285,49 +285,8 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   responseHeaders = WinHttp.GetAllResponseHeaders
   
   tmpArr = Split(responseBody, "'")
-  Exit Sub
-End Sub
-
-Public Sub SetTieba(ByRef showList As ListBox)
-  ReDim tieba(0)
-  Dim isShow As Boolean
-  If showList Is Nothing Then
-    isShow = False
-  Else
-    isShow = True
-    showList.Clear
-  End If
-  WinHttp.Open "GET", "http://tieba.baidu.com/?page=like", True
-  WinHttp.SetTimeouts 30000, 30000, 30000, 30000
-  WinHttp.SetRequestHeader "Host", "tieba.baidu.com"
-  WinHttp.SetRequestHeader "Connection", "keep-alive"
-  WinHttp.SetRequestHeader "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-  WinHttp.SetRequestHeader "User-Agent", "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"
-  WinHttp.SetRequestHeader "Accept-Language", "zh-CN,zh;q=0.8"
-  WinHttp.SetRequestHeader "Cookie", "BAIDUID=" & baiduId & "; BDUSS=" & BDUSS
-  WinHttp.Send            '发送
-  WinHttp.WaitForResponse '异步发送
-  responseBody = BytesToBstr(WinHttp.responseBody, "utf-8")
-  responseHeaders = WinHttp.GetAllResponseHeaders
-  IS_NEW_USER = Split(Split(responseHeaders, "IS_NEW_USER=")(1), ";")(0)
-  BAIDU_WISE_UID = Split(Split(responseHeaders, "BAIDU_WISE_UID=")(1), ";")(0)
-  TIEBAUID = Split(Split(responseHeaders, "TIEBAUID=")(1), ";")(0)
-  tbs = Split(Split(responseBody, "tbs" & Chr(34) & ":" & Chr(34))(1), Chr(34))(0)
-  '-----------------------------------------------------------------打开手机版贴吧个人中心
-  '-----------------------------------------------------------------
-  If InStr(responseBody, "<div class=" & Chr(34) & "forumTile_name" & Chr(34) & ">") > 0 Then
-      Dim a As Integer
-      For a = 1 To UBound(Split(responseBody, "<div class=" & Chr(34) & "forumTile_name" & Chr(34) & ">"))
-        ReDim Preserve tieba(a)
-        tieba(a) = Split(Split(responseBody, "<div class=" & Chr(34) & "forumTile_name" & Chr(34) & ">")(a), "</div>")(0)
-        If isShow Then
-          showList.AddItem tieba(a)
-          showList.ListIndex = showList.ListCount - 1
-        End If
-      Next a
-  Else
-      MsgBox "你这屌毛连个贴吧都没有，签个毛线的到啊？"
-      Exit Sub
+  If InStr(1, responseBody, "登录成功") > 0 Then
+    MsgBox "登录成功！"
   End If
 End Sub
 
