@@ -4,3 +4,5 @@ cFile = 0, 0, 0, 0, C
 VB_MD5 = 153, 122, 961, 571, C
 VB_RSA = 25, 25, 833, 474, I
 VB_DATA = 100, 100, 908, 549, C
+VB_Cookie = 0, 0, 0, 0, C
+VB_ExCollection = 0, 0, 0, 0, C

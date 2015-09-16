@@ -110,6 +110,12 @@ Option Explicit
   Private fileOpr As New cFile
   Private jsExec As New ScriptControl
   Private lastCookies As String
+  Private cookieMng As New VB_Cookie
+  
+  Private ptwebqq As String
+  Private clientid As String
+  Private psessionid As String
+  Private key As String
 '------------------------------------------------------------------------------
 '       ÊôÐÔ±äÁ¿
 '------------------------------------------------------------------------------
@@ -142,7 +148,7 @@ End Sub
 Private Sub Class_Terminate()
   '
   Set WinHttp = Nothing
-  Dim J() As String
+  Dim j() As String
 End Sub
 
 
@@ -182,23 +188,6 @@ Private Function BytesToBstr(strBody, CodeBase) '±àÂë×ª»»("UTF-8"»òÕß"GB2312"»òÕ
   Set ObjStream = Nothing
 End Function
 
-Private Function CollectCookie(ByVal HeaderString As String) As String
-  Dim lines() As String
-  Dim line As String
-  Dim I As Integer, cookieContentLoc As Integer
-  Dim cookies As String
-  lines = Split(HeaderString, vbCrLf)
-  I = 0
-  For I = 0 To UBound(lines)
-    line = lines(I)
-    cookieContentLoc = InStr(1, line, "Set-Cookie:")
-    If InStr(1, line, "Set-Cookie:") > 0 Then
-      cookieContentLoc = cookieContentLoc + Len("Set-Cookie:")
-      cookies = cookies & Mid(line, cookieContentLoc)
-    End If
-  Next I
-  CollectCookie = cookies
-End Function
 '//////////////////////////////////////////////////////////////////////////////
 '//
 '//      ¼Ì³ÐÊµÏÖ
@@ -234,6 +223,23 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   Dim pass As String
   
   Set WinHttp = CreateObject("WinHttp.WinHttpRequest.5.1")
+  'get client id
+
+  WinHttp.Open "GET", "http://pub.idqqimg.com/smartqq/js/mq.js", True
+  WinHttp.SetTimeouts 30000, 30000, 30000, 30000
+  WinHttp.SetRequestHeader "Host", "pub.idqqimg.com"
+  WinHttp.SetRequestHeader "Connection", "keep-alive"
+  WinHttp.SetRequestHeader "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+  WinHttp.SetRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36"
+  WinHttp.SetRequestHeader "Accept-Language", "zh-CN,zh;q=0.8"
+  WinHttp.Send            '·¢ËÍ
+  WinHttp.WaitForResponse 'Òì²½·¢ËÍ
+  responseBody = BytesToBstr(WinHttp.responseBody, "UTF-8")
+  responseHeaders = WinHttp.GetAllResponseHeaders
+  'get clientid
+  clientid = Split(Split(responseBody, "setValidate({clientid:")(1), ",")(0)
+  'load cookies to mem
+  cookieMng.AddCookiesFromHeaders responseHeaders
   'https://ssl.ptlogin2.qq.com/check?pt_tea=1&uin=[QQNumber]&appid=501004106&js_ver=10034&js_type=0&login_sig=&u1=http%3A%2F%2Fw.qq.com%2Fproxy.html&r=0.23477151861080792
   Verify_Code_Url = "https://ssl.ptlogin2.qq.com/check?pt_tea=1&uin=[QQNumber]&appid=501004106&js_ver=10034&js_type=0&login_sig=&u1=http%3A%2F%2Fw.qq.com%2Fproxy.html&r=0.23477151861080792"
   Verify_Code_Url = Replace(Verify_Code_Url, "[QQNumber]", qq)
@@ -248,6 +254,8 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   WinHttp.WaitForResponse 'Òì²½·¢ËÍ
   responseBody = BytesToBstr(WinHttp.responseBody, "UTF-8")
   responseHeaders = WinHttp.GetAllResponseHeaders
+  'load cookies
+  cookieMng.AddCookiesFromHeaders responseHeaders
   lastCookies = CollectCookie(responseHeaders)
   'get varify code info
   tmpArr = Split(responseBody, "'")
@@ -283,8 +291,13 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   WinHttp.WaitForResponse 'Òì²½·¢ËÍ
   responseBody = BytesToBstr(WinHttp.responseBody, "UTF-8")
   responseHeaders = WinHttp.GetAllResponseHeaders
+  lastCookies = CollectCookie(responseHeaders)
   
-  tmpArr = Split(responseBody, "'")
+  ptwebqq = getCookie("ptwebqq")
+  clientid = getCookie("clientid")
+  psessionid = getCookie("psessionid")
+  key = getCookie("key")
+  
   If InStr(1, responseBody, "µÇÂ¼³É¹¦") > 0 Then
     MsgBox "µÇÂ¼³É¹¦£¡"
   End If
