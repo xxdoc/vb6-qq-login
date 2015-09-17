@@ -82,40 +82,20 @@ Option Explicit
 '------------------------------------------------------------------------------
   Private responseBody As String
   Private responseHeaders As String
-  Private baiduId As String
-  Private token As String
-  Private UBI As String
-  Private codestring As String
-  Private yanzhengma As String
-  
-  Private HISTORY As String
-  Private BDUSS As String
-  Private PTOKEN As String
-  Private STOKEN As String
-  Private SAVEUSERID As String
-  Private USERNAMETYPE As String
-  Private PASSID As String
-  
-  Private IS_NEW_USER As String
-  Private BAIDU_WISE_UID As String
-  Private TIEBAUID As String
-  
-  Private tbs As String
-  
-  'Ìù°ÉÁÐ±í
-  Private tieba() As String
-  
-  
   Private WinHttp As WinHttp.WinHttpRequest
   Private fileOpr As New cFile
   Private jsExec As New ScriptControl
   Private lastCookies As String
   Private cookieMng As New VB_Cookie
   
-  Private ptwebqq As String
+  'µÚÒ»²½£¬Ô¤ÏÈ»ñµÃ
   Private clientid As String
+  'Ò»¼¶µÇÂ¼»ñµÃ
+  Private ptwebqq As String
+  Private skey As String
+  '¶þ¼¶µÇÂ¼»ñµÃµÄÊý¾Ý
   Private psessionid As String
-  Private key As String
+  Private vfwebqq As String
 '------------------------------------------------------------------------------
 '       ÊôÐÔ±äÁ¿
 '------------------------------------------------------------------------------
@@ -146,9 +126,7 @@ End Sub
 '       Ïú»Ù
 '------------------------------------------------------------------------------
 Private Sub Class_Terminate()
-  '
   Set WinHttp = Nothing
-  Dim j() As String
 End Sub
 
 
@@ -188,6 +166,28 @@ Private Function BytesToBstr(strBody, CodeBase) '±àÂë×ª»»("UTF-8"»òÕß"GB2312"»òÕ
   Set ObjStream = Nothing
 End Function
 
+Public Function UrlEncode(ByVal strParameter As String) As String
+  Dim s As String
+  Dim I As Integer
+  Dim intValue As Integer
+  Dim TmpData() As Byte
+
+  s = ""
+  TmpData = StrConv(strParameter, vbFromUnicode)
+  For I = 0 To UBound(TmpData)
+    intValue = TmpData(I)
+    If (intValue >= 48 And intValue <= 57) Or _
+      (intValue >= 65 And intValue <= 90) Or _
+      (intValue >= 97 And intValue <= 122) Then
+      s = s & Chr(intValue)
+    ElseIf intValue = 32 Then
+      s = s & "+"
+    Else
+      s = s & "%" & Hex(intValue)
+    End If
+  Next I
+  UrlEncode = s
+End Function
 '//////////////////////////////////////////////////////////////////////////////
 '//
 '//      ¼Ì³ÐÊµÏÖ
@@ -222,6 +222,9 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   Dim user As String
   Dim pass As String
   
+  'step 3
+  Dim r As String
+  
   Set WinHttp = CreateObject("WinHttp.WinHttpRequest.5.1")
   'get client id
 
@@ -240,7 +243,9 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   clientid = Split(Split(responseBody, "setValidate({clientid:")(1), ",")(0)
   'load cookies to mem
   cookieMng.AddCookiesFromHeaders responseHeaders
+  lastCookies = cookieMng.getCookieOfDomain("ptlogin2.qq.com")
   'https://ssl.ptlogin2.qq.com/check?pt_tea=1&uin=[QQNumber]&appid=501004106&js_ver=10034&js_type=0&login_sig=&u1=http%3A%2F%2Fw.qq.com%2Fproxy.html&r=0.23477151861080792
+  '¡¾µÚÒ»²½£º¼ì²âÑéÖ¤Âë¡¿
   Verify_Code_Url = "https://ssl.ptlogin2.qq.com/check?pt_tea=1&uin=[QQNumber]&appid=501004106&js_ver=10034&js_type=0&login_sig=&u1=http%3A%2F%2Fw.qq.com%2Fproxy.html&r=0.23477151861080792"
   Verify_Code_Url = Replace(Verify_Code_Url, "[QQNumber]", qq)
   WinHttp.Open "GET", Verify_Code_Url, True
@@ -256,7 +261,7 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   responseHeaders = WinHttp.GetAllResponseHeaders
   'load cookies
   cookieMng.AddCookiesFromHeaders responseHeaders
-  lastCookies = CollectCookie(responseHeaders)
+  lastCookies = cookieMng.getCookieOfDomain("ptlogin2.qq.com")
   'get varify code info
   tmpArr = Split(responseBody, "'")
   VerifyCode = tmpArr(3)
@@ -265,42 +270,87 @@ Public Sub Login(ByVal qq As String, ByVal password As String, ByRef pictureBox 
   jsExec.Reset
   VerifySession = tmpArr(7)
   'ready js calculation
-  jsCode = fileOpr.ReadTextFile(App.Path & "\encrypt1.js")
+  jsCode = fileOpr.ReadTextFile(App.path & "\encrypt1.js")
   jsExec.AddCode jsCode
   
   user = qq
   pass = jsExec.Run("getEncryption", password, Salt, VerifyCode)
-  'login
+  '¡¾µÚ¶þ²½£ºÒ»¼¶µÇÂ¼¡¿
   Login_Url = "https://ssl.ptlogin2.qq.com/login?u=" & user
   Login_Url = Login_Url & "&p=" & pass
   Login_Url = Login_Url & "&verifycode=" & VerifyCode
   Login_Url = Login_Url & "&webqq_type=10&remember_uin=1&login2qq=1&aid=501004106&u1=http%3A%2F%2Fw.qq.com%2Fproxy.html%3Flogin2qq%3D1%26webqq_type%3D10&h=1&ptredirect=0&ptlang=2052&daid=164&from_ui=1&pttype=1&dumy=&fp=loginerroralert&action=0-15-25234&mibao_css=m_webqq&t=1&g=1&js_type=0&js_ver=10034&login_sig=&pt_randsalt=0&pt_vcode_v1=0&pt_verifysession_v1=" & VerifySession
-  'Set obj = jsExec.Run("getRSA")
-  
-  
+
   WinHttp.Open "GET", Login_Url, True
   WinHttp.SetTimeouts 30000, 30000, 30000, 30000
   WinHttp.SetRequestHeader "Host", "ssl.ptlogin2.qq.com"
   WinHttp.SetRequestHeader "Connection", "keep-alive"
   WinHttp.SetRequestHeader "Accept", "*/*"
   WinHttp.SetRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36"
-  'WinHttp.SetRequestHeader "Referer", "http://www.baidu.com/cache/user/html/login-1.2.html"
   WinHttp.SetRequestHeader "Accept-Language", "zh-CN,zh;q=0.8"
-  WinHttp.SetRequestHeader "Cookie", lastCookies
+  If lastCookies <> "" Then
+    WinHttp.SetRequestHeader "Cookie", lastCookies
+  End If
   WinHttp.Send            '·¢ËÍ
   WinHttp.WaitForResponse 'Òì²½·¢ËÍ
   responseBody = BytesToBstr(WinHttp.responseBody, "UTF-8")
   responseHeaders = WinHttp.GetAllResponseHeaders
-  lastCookies = CollectCookie(responseHeaders)
+  'cookies add
+  cookieMng.AddCookiesFromHeaders responseHeaders
+  lastCookies = cookieMng.getCookieOfDomain("qq.com")
   
-  ptwebqq = getCookie("ptwebqq")
-  clientid = getCookie("clientid")
-  psessionid = getCookie("psessionid")
-  key = getCookie("key")
+  ptwebqq = cookieMng.getCookie("ptwebqq").value
+  skey = cookieMng.getCookie("skey").value
   
-  If InStr(1, responseBody, "µÇÂ¼³É¹¦") > 0 Then
-    MsgBox "µÇÂ¼³É¹¦£¡"
+  '¡¾¼ÓÉÏÒ»²½£¬³¢ÊÔ»ñÈ¡p_skey¡¿
+  'http://s.web2.qq.com/proxy.html?v=20130916001&callback=1&id=1
+  WinHttp.Open "GET", Split(responseBody, "'")(5), True
+  WinHttp.SetTimeouts 30000, 30000, 30000, 30000
+  WinHttp.SetRequestHeader "Host", "ptlogin4.web2.qq.com"
+  WinHttp.SetRequestHeader "Connection", "keep-alive"
+  WinHttp.SetRequestHeader "Accept", "*/*"
+  WinHttp.SetRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36"
+  WinHttp.SetRequestHeader "Accept-Language", "zh-CN,zh;q=0.8"
+  WinHttp.Option(WinHttpRequestOption_EnableRedirects) = False
+  If lastCookies <> "" Then
+    WinHttp.SetRequestHeader "Cookie", lastCookies
   End If
+  WinHttp.Send            '·¢ËÍ
+  WinHttp.WaitForResponse 'Òì²½·¢ËÍ
+  responseBody = BytesToBstr(WinHttp.responseBody, "UTF-8")
+  responseHeaders = WinHttp.GetAllResponseHeaders
+  
+  cookieMng.AddCookiesFromHeaders responseHeaders
+  lastCookies = cookieMng.getCookieOfNames(Array("uin", "skey", "p_skey", "ptwebqq"))
+  
+  '¡¾µÚÈý²½£º¶þ¼¶µÇÂ¼¡¿
+  r = "{""ptwebqq"":""" & ptwebqq
+  r = r & """,""clientid"":" & clientid
+  r = r & ",""psessionid"":"""",""status"":""away""}"
+  r = UrlEncode(r)
+  WinHttp.Open "POST", "http://d.web2.qq.com/channel/login2", True
+  WinHttp.SetTimeouts 30000, 30000, 30000, 30000
+  WinHttp.SetRequestHeader "Host", "d.web2.qq.com"
+  WinHttp.SetRequestHeader "Connection", "keep-alive"
+  WinHttp.SetRequestHeader "Accept", "*/*"
+  WinHttp.SetRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36"
+  WinHttp.SetRequestHeader "Accept-Language", "zh-CN,zh;q=0.8"
+  WinHttp.SetRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+  WinHttp.SetRequestHeader "Content-Length", LenB(r)
+  'Content-Length: 180
+  WinHttp.SetRequestHeader "Referer", "http://d.web2.qq.com/proxy.html?v=20130916001&callback=1&id=2"
+  'lastCookies = lastCookies & ";p_skey=" & cookieMng.getCookie("p_skey").value
+  WinHttp.SetRequestHeader "Cookie", lastCookies
+  WinHttp.Send "r=" & r            '·¢ËÍ
+  'Referer: http://d.web2.qq.com/proxy.html?v=20130916001&callback=1&id=2
+  WinHttp.WaitForResponse 'Òì²½·¢ËÍ
+  responseBody = BytesToBstr(WinHttp.responseBody, "UTF-8")
+  responseHeaders = WinHttp.GetAllResponseHeaders
+  'cookies add
+  cookieMng.AddCookiesFromHeaders responseHeaders
+  lastCookies = cookieMng.cookieString()
+  
+  Exit Sub
 End Sub
 
 Public Sub SignTieBa(ByRef showList As ListBox, ByRef sourceList As ListBox)

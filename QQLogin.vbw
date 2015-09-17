@@ -1,8 +1,6 @@
 mainForm = 140, 78, 948, 527, C, 25, 25, 833, 474, C
-QQService = 10, 16, 968, 614, 
+QQService = 6, 11, 964, 609, Z
 cFile = 0, 0, 0, 0, C
-VB_MD5 = 153, 122, 961, 571, C
-VB_RSA = 25, 25, 833, 474, I
-VB_DATA = 100, 100, 908, 549, C
-VB_Cookie = 0, 0, 0, 0, C
-VB_ExCollection = 0, 0, 0, 0, C
+VB_Cookie = 84, 70, 892, 519, 
+VB_ExCollection = 100, 100, 908, 549, 
+VB_Cookie_Data = 0, 0, 0, 0, C
