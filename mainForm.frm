@@ -9,6 +9,14 @@ Begin VB.Form mainForm
    ScaleHeight     =   5130
    ScaleWidth      =   11130
    StartUpPosition =   3  '´°¿ÚÈ±Ê¡
+   Begin VB.CommandButton Command1 
+      Caption         =   "Command1"
+      Height          =   435
+      Left            =   180
+      TabIndex        =   3
+      Top             =   2340
+      Width           =   1995
+   End
    Begin VB.PictureBox Picture1 
       Height          =   1335
       Left            =   120
@@ -42,9 +50,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-
+Private webQQ As New QQService
 Private Sub btnTryLogin_Click()
-  Dim webQQ As New QQService
   webQQ.Login "656972278", "sunwin", Picture1
   'Dim md5 As New VB_MD5
   'txtCode.Text = md5.Md5_String_Calc("123")
@@ -60,4 +67,8 @@ Private Sub btnTryLogin_Click()
 '  src.Language = "JavaScript"
 '  src.AddCode code
 '  txtCode.Text = src.Run("$.Encryption.getEncryption")
+End Sub
+
+Private Sub Command1_Click()
+  webQQ.getFriends
 End Sub
