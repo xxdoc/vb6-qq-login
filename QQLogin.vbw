@@ -1,7 +1,8 @@
-mainForm = 140, 78, 948, 527, , 25, 25, 833, 474, C
-QQService = 55, 3, 1013, 601, Z
-cFile = 125, 125, 1146, 445, 
+mainForm = 130, 23, 938, 472, , 25, 25, 944, 546, C
+QQService = 60, -13, 1018, 568, C
+cFile = 61, 75, 1082, 395, C
 VB_Cookie = 129, 55, 937, 504, C
 VB_ExCollection = 100, 100, 908, 549, C
 VB_Cookie_Data = 0, 0, 0, 0, C
-VB_QQ_Friend = 25, 25, 904, 458, 
+VB_QQ_Friend = 25, 25, 904, 458, C
+VB_QQ_Group = 75, 75, 954, 508, C

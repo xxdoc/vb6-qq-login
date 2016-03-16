@@ -102,7 +102,13 @@ Option Explicit
 '------------------------------------------------------------------------------
 '       属性变量
 '------------------------------------------------------------------------------
+Public Property Get QQ() As String
+  QQ = uin
+End Property
 
+Public Property Let QQ(ByVal QQ As String)
+  uin = QQ
+End Property
 
 '------------------------------------------------------------------------------
 '       私有API
@@ -210,7 +216,8 @@ End Function
 '//      公有方法
 '//
 '//////////////////////////////////////////////////////////////////////////////
-Public Sub Login(ByVal QQ As String, ByVal password As String, ByRef pictureBox As pictureBox)
+Public Function Login(ByVal QQ As String, ByVal password As String, ByRef pictureBox As pictureBox) As Boolean
+  On Error GoTo errProcess
   Dim WinHttp As WinHttp.WinHttpRequest '声明一个对象
   
   Dim Verify_Code_Url As String
@@ -362,15 +369,24 @@ Public Sub Login(ByVal QQ As String, ByVal password As String, ByRef pictureBox 
     psessionid = json.result.psessionid
     vfwebqq = json.result.vfwebqq
   End If
-  MsgBox "ok"
-End Sub
+  Login = True
+  Exit Function
+errProcess:
+  Login = False
+End Function
 '获取好友列表
-Public Function getFriends() As VB_QQ_Friend()
+Public Function getFriends() As Variant()
+  On Error Resume Next
   'hash
   Dim hash As String
   Dim hashJS As String
   Dim r As String
   Dim json As Variant
+  Dim friendAnaysis As String
+  Dim pfriend As Variant
+  Dim obj As Variant
+  Dim qqFriends() As Variant
+  Dim I As Integer
   
   hashJS = fileOpr.ReadTextFile(App.path & "\script\hash.js")
   jsExec.Reset
@@ -404,10 +420,33 @@ Public Function getFriends() As VB_QQ_Friend()
   jsExec.Reset
   jsExec.AddCode "function getData() { return " & responseBody & ";}"
   Set json = jsExec.Run("getData")
-  If json.retcode = 0 Then
-    jsExec.Reset
-    jsExec.AddCode fileOpr.ReadTextFile(App.path & "\script\friends.analyse.js")
-    Set json = jsExec.Run("analyse_friends", responseBody)
+  If json.retcode <> 0 Then
+    MsgBox "信息获取失误！"
+    Exit Function
   End If
+
+  jsExec.Reset
+  friendAnaysis = fileOpr.ReadTextFile(App.path & "\script\friends.analyse.js")
+  jsExec.AddCode friendAnaysis
+  Set json = jsExec.Run("analyse_friends", responseBody)
+
+  Set pfriend = json.dataarr
+  I = 0
+  For Each obj In pfriend
+    ReDim Preserve qqFriends(I)
+    Dim qqFriend As New VB_QQ_Friend
+    qqFriend.QQ = obj.QQ号
+    qqFriend.RealName = obj.备注名
+    qqFriend.NickName = obj.昵称
+    qqFriend.Is_Vip = obj.是否VIP
+    Set qqFriends(I) = qqFriend
+    Set qqFriend = Nothing
+    I = I + 1
+  Next
+  getFriends = qqFriends
+End Function
+
+Public Function getGroups()
+
 End Function
 

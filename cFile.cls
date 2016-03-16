@@ -56,19 +56,19 @@ End Sub
 '                    Content (String)
 '--------------------------------------------------------------------------------
 '</CSCM>
-Public Function WriteToTextFile(ByVal FilePath As String, _
+Public Function WriteToTextFile(ByVal filePath As String, _
                                 ByVal Content As String) As Boolean
 
     On Error Resume Next
 
     Dim fileId As Long
 
-    fileId = FreeFile
+    fileId = freeFile
 
-    If PathFileExists(FilePath) Then
-        Open FilePath For Append As fileId
+    If PathFileExists(filePath) Then
+        Open filePath For Append As fileId
     Else
-        Open FilePath For Output As fileId
+        Open filePath For Output As fileId
     End If
 
     Print #fileId, Content;
@@ -79,6 +79,40 @@ Public Function WriteToTextFile(ByVal FilePath As String, _
         Err.Clear
     Else
         WriteToTextFile = True
+    End If
+
+End Function
+'【公共函数：覆盖写文件】
+'<CSCM>
+'--------------------------------------------------------------------------------
+' Project    :       Recent
+' Procedure  :       WriteToTextFile
+' Description:       向文件写入文本
+' Created by :       Project Administrator
+' Machine    :       MYSOFT-SUNR01
+' Date-Time  :       1-18-2015-14:30:32
+'
+' Parameters :       FilePath (String)
+'                    Content (String)
+'--------------------------------------------------------------------------------
+'</CSCM>
+Public Function OverWriteToTextFile(ByVal filePath As String, _
+                                ByVal Content As String) As Boolean
+    On Error Resume Next
+
+    Dim fileId As Long
+
+    fileId = freeFile
+
+    Open filePath For Output As fileId
+      Print #fileId, Content;
+    Close fileId
+
+    If Err.Number > 0 Then
+        OverWriteToTextFile = False
+        Err.Clear
+    Else
+        OverWriteToTextFile = True
     End If
 
 End Function
@@ -96,9 +130,9 @@ End Function
 '                    Content (String)
 '--------------------------------------------------------------------------------
 '</CSCM>
-Public Function WriteLineToTextFile(ByVal FilePath As String, _
+Public Function WriteLineToTextFile(ByVal filePath As String, _
                                     ByVal Content As String) As Boolean
-    WriteLineToTextFile = WriteToTextFile(FilePath, vbCrLf & Content)
+    WriteLineToTextFile = WriteToTextFile(filePath, vbCrLf & Content)
 End Function
 
 '【公共函数：读文件】
@@ -115,7 +149,7 @@ End Function
 ' Parameters :       FilePath (String)
 '--------------------------------------------------------------------------------
 '</CSCM>
-Public Function ReadTextFile(ByVal FilePath As String) As String
+Public Function ReadTextFile(ByVal filePath As String) As String
 
     Dim fileId As Long
 
@@ -123,16 +157,16 @@ Public Function ReadTextFile(ByVal FilePath As String) As String
 
     Dim fSize  As Long
 
-    fileId = FreeFile
+    fileId = freeFile
 
-    If FileExists(FilePath) = False Then
+    If FileExists(filePath) = False Then
         Err.Raise 100, , "文件不存在！"
     End If
     
-    fSize = FileLen(FilePath)
+    fSize = FileLen(filePath)
     ReDim fBin(fSize - 1)
     
-    Open FilePath For Binary Access Read As fileId
+    Open filePath For Binary Access Read As fileId
         Get #fileId, , fBin
     Close fileId
 
@@ -157,8 +191,8 @@ End Function
 ' Parameters :       FilePath (String)
 '--------------------------------------------------------------------------------
 '</CSCM>
-Public Function FileExists(ByVal FilePath As String) As Boolean
-    FileExists = PathFileExists(FilePath)
+Public Function FileExists(ByVal filePath As String) As Boolean
+    FileExists = PathFileExists(filePath)
 End Function
 
 '<CSCM>
@@ -173,12 +207,31 @@ End Function
 ' Parameters :       FilePath (String)
 '--------------------------------------------------------------------------------
 '</CSCM>
-Public Sub Delete(ByVal FilePath As String)
-    If FileExists(FilePath) Then
-        If DeleteFile(FilePath) = 0 Then
+Public Sub Delete(ByVal filePath As String)
+    If FileExists(filePath) Then
+        If DeleteFile(filePath) = 0 Then
             Err.Raise 11, , "文件删除错误！"
         End If
     Else
         Err.Raise 12, , "文件路径不存在！"
     End If
+End Sub
+
+'<CSCM>
+'--------------------------------------------------------------------------------
+' Project    :       类库构建项目
+' Procedure  :       Touch
+' Description:       如果路径不存在，就创建
+' Created by :       Project Administrator
+' Machine    :       MYSOFT-SUNR01
+' Date-Time  :       1-18-2015-16:59:10
+'
+' Parameters :       FilePath (String)
+'--------------------------------------------------------------------------------
+'</CSCM>
+Public Sub Touch(ByVal filePath As String)
+  Dim fileNo As Integer
+  fileNo = freeFile
+  Open filePath For Random As fileNo
+  Close fileNo
 End Sub
