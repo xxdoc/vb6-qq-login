@@ -108,6 +108,8 @@ Private Sub btnTryLogin_Click()
   If webQQ.Login(txtQQ.Text, txtPassWord.Text, Picture1) Then
     Call Log("µÇÂ¼³É¹¦£¡")
     Call ActiveBtns
+  Else
+    Call Log("µÇÂ¼Ê§°Ü£¡")
   End If
 End Sub
 

@@ -1,6 +1,6 @@
 Type=Exe
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Reference=*\G{662901FC-6951-4854-9EB2-D9A2570F2B2E}#5.1#0#C:\Windows\system32\winhttp.dll#Microsoft WinHTTP Services, version 5.1
+Reference=*\G{662901FC-6951-4854-9EB2-D9A2570F2B2E}#5.1#0#C:\WINDOWS\system32\winhttpcom.dll#Microsoft WinHTTP Services, version 5.1
 Reference=*\G{0E59F1D2-1FBE-11D0-8FF2-00A0D10038BC}#1.0#0#C:\Windows\SysWOW64\msscript.ocx#Microsoft Script Control 1.0
 Form=mainForm.frm
 Class=QQService; QQService.cls
@@ -8,7 +8,7 @@ Class=cFile; cFile.cls
 Class=VB_Cookie; VB_Cookie.cls
 Class=VB_ExCollection; VB_ExCollection.cls
 Class=VB_Cookie_Data; VB_Cookie_Data.cls
-Reference=*\G{AC0714F2-3D04-11D1-AE7D-00A0C90F26F4}#1.0#0#C:\Program Files (x86)\Common Files\Designer\msaddndr.dll#Microsoft Add-In Designer
+Reference=*\G{AC0714F2-3D04-11D1-AE7D-00A0C90F26F4}#1.0#0#C:\Program Files (x86)\VB6Mini\bin\Designers\MSADDNDR\MSADDNDR.TLB#Microsoft Add-In Designer
 Class=VB_QQ_Friend; VB_QQ_Friend.cls
 Class=VB_QQ_Group; VB_QQ_Group.cls
 Startup="mainForm"

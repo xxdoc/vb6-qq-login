@@ -305,6 +305,7 @@ Public Function Login(ByVal QQ As String, ByVal password As String, ByRef pictur
   End If
   WinHttp.Send            '发送
   WinHttp.WaitForResponse '异步发送
+  '此处提交参数错误
   responseBody = BytesToBstr(WinHttp.responseBody, "UTF-8")
   responseHeaders = WinHttp.GetAllResponseHeaders
   'cookies add
